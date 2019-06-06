@@ -1,8 +1,12 @@
 var list = ["cats", "dog", "fish"];
 
+$(".change").on("click", function(){
+    alert("hi");
+})
+
 $("#add-button").on("click", function(){
-    var dataValue = document.getElementById("user").value;
-    list.push(dataValue);
+    var dataValue = document.getElementById("user");
+    list.push(dataValue.value);
 
     $("#buttons").empty();
 
@@ -12,12 +16,15 @@ $("#add-button").on("click", function(){
         newButton.text(list[i]);
         $("#buttons").append(newButton);
     }
+    dataValue.value= "";
 
     buttonWork();
 })
 
 function buttonWork() {
     $("button").on("click", function(){
+
+        $("#images").empty();
 
         var data = $(this).attr("data-name");
         var link = "https://api.giphy.com/v1/gifs/search?api_key=mlDPhCMeJbeV6rDU6gCS025nk1pBDPgy&q=" + data + "&limit=20&offset=0&rating=G&lang=en";
@@ -34,8 +41,11 @@ function buttonWork() {
                 imgTag.attr("data-run", gif);
                 imgTag.attr("data-still", pic);
                 imgTag.attr("data-status", "still");
+                imgTag.attr("class", "change");
                 $("#images").append(imgTag);
             }
         })
     })
 }
+
+buttonWork();

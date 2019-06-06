@@ -17,18 +17,19 @@ button:hover {
     color: aquamarine;
 }
 
-button:focus {
-    background-color: black;
-    color: yellow;
-}
-
 #images {
     float: left;
     width: 65%;
 }
 
 #form {
+    margin-top: 12px;
     margin-left: 8px;
     float: left;
     width: 34%;
+}
+
+p {
+    font-weight: bold;
+    font-size: 25px;
 }
