@@ -1,9 +1,5 @@
 var list = ["cats", "dog", "fish"];
 
-$(".change").on("click", function(){
-    alert("hi");
-})
-
 $("#add-button").on("click", function(){
     var dataValue = document.getElementById("user");
     list.push(dataValue.value);
@@ -44,8 +40,22 @@ function buttonWork() {
                 imgTag.attr("class", "change");
                 $("#images").append(imgTag);
             }
+            changeType();
         })
     })
 }
 
 buttonWork();
+
+function changeType() {
+    $(".change").on("click", function(){
+        
+        if( $(this).attr("data-status") == "still" ){
+            $(this).attr("src", $(this).attr("data-run"));
+            $(this).attr("data-status", "run")
+        } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-status", "still")
+        }
+    })
+}

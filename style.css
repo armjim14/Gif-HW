@@ -33,3 +33,18 @@ p {
     font-weight: bold;
     font-size: 25px;
 }
+
+#add-button{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 8px;
+    margin: 10px;
+    background-color: aquamarine;
+    border: 1px black solid;
+    border-radius: 25%;
+}
+
+#add-button:hover {
+    background-color: black;
+    color: aquamarine;
+}
