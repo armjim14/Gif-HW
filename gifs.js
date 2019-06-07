@@ -62,6 +62,7 @@ function buttonWork() {
                 imgTag.attr("data-still", pic);
                 imgTag.attr("data-status", "still");
                 imgTag.attr("class", "change");
+                imgTag.attr("id", i);
                 imgTag.attr("data-name", data);
                 $("#images").append(imgTag);
             } 
@@ -75,22 +76,35 @@ buttonWork();
 //able to switch from gif to pic
 function changeType() {
     $(".change").on("click", function(){
+
+        var status = $(this).attr("data-status");
+        var name = $(this).attr("id");
         
-        if( $(this).attr("data-status") == "still" ){
+        if( status == "still" ){
             $(this).attr("src", $(this).attr("data-run"));
             $(this).attr("data-status", "run")
         } else {
             $(this).attr("src", $(this).attr("data-still"));
             $(this).attr("data-status", "still")
         }
-
+            add(status, name)
     })// click function ends
 }//function ends
 
-// function add(){
-//     $("#add-fav").on("click", function(){
-//         if ($(.class).attr("data-status") == "run"){
-//             $(this).attr("data-name")
-//         }
-//     })
-// }
+function add(status, name){
+    $("#add-fav").on("click", function(){
+        // for( let i = 0; i < classed; i++ ){
+            if ( status == "run" ){
+                alert("second");
+                fav.push(name);
+            }
+        // }
+
+    })
+}
+
+/*
+    find status of image
+    if image is gif add that to a separate list
+    add new button to play those specific stuff
+*/
