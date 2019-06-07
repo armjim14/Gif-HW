@@ -34,7 +34,7 @@ p {
     font-size: 25px;
 }
 
-#add-button{
+#add-button, #add-fav {
     font-size: 20px;
     font-weight: bold;
     padding: 8px;
@@ -44,7 +44,7 @@ p {
     border-radius: 25%;
 }
 
-#add-button:hover {
+#add-button:hover, #add-fav:hover {
     background-color: black;
     color: aquamarine;
 }

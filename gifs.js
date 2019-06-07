@@ -1,5 +1,28 @@
 var list = ["cats", "dog", "fish"];
+var fav = [];
 
+// made Enter key work to add-button.on("click")
+document.onkeyup = function(e){
+    var choice = e.key;
+    
+    if( choice == "Enter" ){
+        var dataValue = document.getElementById("user");
+        list.push(dataValue.value);
+    
+        $("#buttons").empty();
+    
+        for( let i = 0; i < list.length; i++ ){
+            var newButton = $("<button>");
+            newButton.attr("data-name", list[i]);
+            newButton.text(list[i]);
+            $("#buttons").append(newButton);
+        }
+
+        dataValue.value= "";
+        buttonWork();
+    }// if statment ends
+}
+//user adds button that is name from the value from the input
 $("#add-button").on("click", function(){
     var dataValue = document.getElementById("user");
     list.push(dataValue.value);
@@ -12,11 +35,12 @@ $("#add-button").on("click", function(){
         newButton.text(list[i]);
         $("#buttons").append(newButton);
     }
-    dataValue.value= "";
 
+    dataValue.value= "";
     buttonWork();
 })
 
+//going to display all the images
 function buttonWork() {
     $("button").on("click", function(){
 
@@ -38,15 +62,17 @@ function buttonWork() {
                 imgTag.attr("data-still", pic);
                 imgTag.attr("data-status", "still");
                 imgTag.attr("class", "change");
+                imgTag.attr("data-name", data);
                 $("#images").append(imgTag);
-            }
+            } 
             changeType();
-        })
-    })
-}
+        }) // once we get request funtion ends
+    }) //click funtion ends
+}//function ends
 
 buttonWork();
 
+//able to switch from gif to pic
 function changeType() {
     $(".change").on("click", function(){
         
@@ -57,5 +83,14 @@ function changeType() {
             $(this).attr("src", $(this).attr("data-still"));
             $(this).attr("data-status", "still")
         }
-    })
-}
+
+    })// click function ends
+}//function ends
+
+// function add(){
+//     $("#add-fav").on("click", function(){
+//         if ($(.class).attr("data-status") == "run"){
+//             $(this).attr("data-name")
+//         }
+//     })
+// }
