@@ -1,5 +1,6 @@
 var list = ["cats", "dog", "fish"];
 var fav = [];
+var count = 0;
 
 document.onkeyup = function(e){ var choice = e.key; if( choice == "Enter" ){ addbuttons(); }}
 
@@ -47,12 +48,14 @@ function buttonWork() {
                 imgTag.attr("data-run", gif);
                 imgTag.attr("data-still", pic);
                 imgTag.attr("data-status", "still");
+                imgTag.attr("data-number", "pic"+count)
                 imgTag.attr("class", "change");
                 newbutton.attr("data-number", "pic"+i);
                 imgTag.attr("data-name", data);
                 $("#images").append(newp);
                 $("#images").append(newbutton);
                 $("#images").append(imgTag);
+                count++;
             } 
             changeType();
             add();
@@ -81,7 +84,7 @@ function changeType() {
 function add(){
     $(".add-fav").on("click", function(){
 
-        var srcvalue = $("img").attr("src");
+        var srcvalue = $("#pic"+ count).attr("src");
         var still = $("img").attr("data-still");
         var run = $("img").attr("data-run");
         var stat = $("img").attr("data-status");
@@ -94,7 +97,7 @@ function add(){
 $("#play-fav").on("click", function(){
     if (fav = []){
         alert("You have nothing on your favorites");
-    } else {
+    } else if (fav !== []) {
         alert("no");
     }
 })
