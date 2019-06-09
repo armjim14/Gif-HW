@@ -29,12 +29,12 @@ button:hover {
     width: 34%;
 }
 
-p {
+#para {
     font-weight: bold;
     font-size: 25px;
 }
 
-#add-button, #add-fav {
+#add-button, #add-fav, #play-fav {
     font-size: 20px;
     font-weight: bold;
     padding: 8px;
@@ -44,7 +44,7 @@ p {
     border-radius: 25%;
 }
 
-#add-button:hover, #add-fav:hover {
+#add-button:hover, #add-fav:hover, #play-fav:hover {
     background-color: black;
     color: aquamarine;
 }

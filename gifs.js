@@ -1,29 +1,12 @@
 var list = ["cats", "dog", "fish"];
 var fav = [];
+var count = 0;
 
-// made Enter key work to add-button.on("click")
-document.onkeyup = function(e){
-    var choice = e.key;
-    
-    if( choice == "Enter" ){
-        var dataValue = document.getElementById("user");
-        list.push(dataValue.value);
-    
-        $("#buttons").empty();
-    
-        for( let i = 0; i < list.length; i++ ){
-            var newButton = $("<button>");
-            newButton.attr("data-name", list[i]);
-            newButton.text(list[i]);
-            $("#buttons").append(newButton);
-        }
+document.onkeyup = function(e){ var choice = e.key; if( choice == "Enter" ){ addbuttons(); }}
 
-        dataValue.value= "";
-        buttonWork();
-    }// if statment ends
-}
-//user adds button that is name from the value from the input
-$("#add-button").on("click", function(){
+$("#add-button").on("click", function(){ addbuttons(); })
+
+function addbuttons(){
     var dataValue = document.getElementById("user");
     list.push(dataValue.value);
 
@@ -38,7 +21,7 @@ $("#add-button").on("click", function(){
 
     dataValue.value= "";
     buttonWork();
-})
+}
 
 //going to display all the images
 function buttonWork() {
@@ -57,16 +40,25 @@ function buttonWork() {
             for(let i = 0; i < runTime.length; i++){
                 var gif = response.data[i].images.fixed_width.url;
                 var pic = response.data[i].images.fixed_height_still.url;
+                var title = response.data[i].title;
                 var imgTag = $("<img>").attr("src", pic);
+                var newp = $("<p>").text(title);
+                var newbutton = $("<button>").text("Fav");
+                newbutton.attr("class", "add-fav");
                 imgTag.attr("data-run", gif);
                 imgTag.attr("data-still", pic);
                 imgTag.attr("data-status", "still");
+                imgTag.attr("data-number", "pic"+count)
                 imgTag.attr("class", "change");
-                imgTag.attr("id", i);
+                newbutton.attr("data-number", "pic"+i);
                 imgTag.attr("data-name", data);
+                $("#images").append(newp);
+                $("#images").append(newbutton);
                 $("#images").append(imgTag);
+                count++;
             } 
             changeType();
+            add();
         }) // once we get request funtion ends
     }) //click funtion ends
 }//function ends
@@ -77,9 +69,8 @@ buttonWork();
 function changeType() {
     $(".change").on("click", function(){
 
-        var status = $(this).attr("data-status");
-        var name = $(this).attr("id");
-        
+        var status = $("img").attr("data-status");
+
         if( status == "still" ){
             $(this).attr("src", $(this).attr("data-run"));
             $(this).attr("data-status", "run")
@@ -87,24 +78,26 @@ function changeType() {
             $(this).attr("src", $(this).attr("data-still"));
             $(this).attr("data-status", "still")
         }
-            add(status, name)
     })// click function ends
 }//function ends
 
-function add(status, name){
-    $("#add-fav").on("click", function(){
-        // for( let i = 0; i < classed; i++ ){
-            if ( status == "run" ){
-                alert("second");
-                fav.push(name);
-            }
-        // }
+function add(){
+    $(".add-fav").on("click", function(){
+
+        var srcvalue = $("#pic"+ count).attr("src");
+        var still = $("img").attr("data-still");
+        var run = $("img").attr("data-run");
+        var stat = $("img").attr("data-status");
+        var clas = $("img").attr("class");
+        fav.push(srcvalue, still, run, stat, clas);
 
     })
 }
 
-/*
-    find status of image
-    if image is gif add that to a separate list
-    add new button to play those specific stuff
-*/
+$("#play-fav").on("click", function(){
+    if (fav = []){
+        alert("You have nothing on your favorites");
+    } else if (fav !== []) {
+        alert("no");
+    }
+})
