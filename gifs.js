@@ -47,7 +47,7 @@ function buttonWork() {
         $("#images").empty();
 
         var data = $(this).attr("data-name");
-        var link = "https://api.giphy.com/v1/gifs/search?api_key=mlDPhCMeJbeV6rDU6gCS025nk1pBDPgy&q=" + data + "&limit=20&offset=0&rating=G&lang=en";
+        var link = "https://api.giphy.com/v1/gifs/search?api_key=mlDPhCMeJbeV6rDU6gCS025nk1pBDPgy&q=" + data + "&limit=10&offset=0&rating=G&lang=en";
         
         $.ajax({
             url: link,
