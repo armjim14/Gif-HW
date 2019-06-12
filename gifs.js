@@ -69,7 +69,7 @@ buttonWork();
 function changeType() {
     $(".change").on("click", function(){
 
-        var status = $("img").attr("data-status");
+        var status = $(this).attr("data-status");
 
         if( status == "still" ){
             $(this).attr("src", $(this).attr("data-run"));
@@ -83,21 +83,21 @@ function changeType() {
 
 function add(){
     $(".add-fav").on("click", function(){
+        var favitems = [];
 
-        var srcvalue = $("#pic"+ count).attr("src");
         var still = $("img").attr("data-still");
         var run = $("img").attr("data-run");
-        var stat = $("img").attr("data-status");
         var clas = $("img").attr("class");
-        fav.push(srcvalue, still, run, stat, clas);
+        favitems.push(still, run, clas);
 
+        fav.push(favitems);
     })
 }
 
 $("#play-fav").on("click", function(){
-    if (fav = []){
+    if (fav.length == 0){
         alert("You have nothing on your favorites");
-    } else if (fav !== []) {
+    } else {
         alert("no");
     }
 })
