@@ -52,9 +52,11 @@ function buttonWork() {
                 imgTag.attr("class", "change");
                 newbutton.attr("data-number", "pic"+i);
                 imgTag.attr("data-name", data);
-                $("#images").append(newp);
-                $("#images").append(newbutton);
-                $("#images").append(imgTag);
+                var newdiv = $("<div>").attr("data-num", i)
+                newdiv.append(newp);
+                newdiv.append(newbutton);
+                newdiv.append(imgTag);
+                $("#images").append(newdiv);
                 count++;
             } 
             changeType();
@@ -83,14 +85,11 @@ function changeType() {
 
 function add(){
     $(".add-fav").on("click", function(){
-        var favitems = [];
 
-        var still = $("img").attr("data-still");
-        var run = $("img").attr("data-run");
-        var clas = $("img").attr("class");
-        favitems.push(still, run, clas);
+        var divNumber = $(this).parent();
+        var imginfo = divNumber.children()[2];
 
-        fav.push(favitems);
+        fav.push(imginfo);
     })
 }
 
@@ -98,6 +97,12 @@ $("#play-fav").on("click", function(){
     if (fav.length == 0){
         alert("You have nothing on your favorites");
     } else {
-        alert("no");
+        $("#images").empty();
+
+        for ( let i = 0; i < fav.length; i++ ){
+            var put = fav[i];
+            $("#images").append(put);
+        }
+        changeType();
     }
 })
