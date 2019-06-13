@@ -71,7 +71,6 @@ function buttonWork() {
                 var title = response.data[i].title;
                 renderGifs(gif, pic, title, i, data);
             } 
-            // changeType();
             add();
         }) // once we get request funtion ends
     }) //click funtion ends
@@ -138,11 +137,7 @@ $("#play-fav").on("click", function(){
     } else {
         $("#images").empty();
 
-        for ( let i = 0; i < fav.length; i++ ){
-            var put = fav[i];
-            $("#images").append(put);
-            //$("#images").append(localStorage.getItem(amount));
-        }
-        changeType();
+        getStorage();
+
     }
 })
