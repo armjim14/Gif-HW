@@ -38,6 +38,7 @@ function buttonWork() {
         }).then(function(response){
             var runTime = response.data;
             for(let i = 0; i < runTime.length; i++){
+                var newDiv = $("<div>");
                 var gif = response.data[i].images.fixed_width.url;
                 var pic = response.data[i].images.fixed_height_still.url;
                 var title = response.data[i].title;
@@ -52,9 +53,10 @@ function buttonWork() {
                 imgTag.attr("class", "change");
                 newbutton.attr("data-number", "pic"+i);
                 imgTag.attr("data-name", data);
-                $("#images").append(newp);
-                $("#images").append(newbutton);
-                $("#images").append(imgTag);
+                $(newDiv).append(newp);
+                $(newDiv).append(newbutton);
+                $(newDiv).append(imgTag);
+                $("#images").append(newDiv);
                 count++;
             } 
             changeType();
@@ -68,13 +70,12 @@ buttonWork();
 //able to switch from gif to pic
 function changeType() {
     $(".change").on("click", function(){
-
-        var status = $("img").attr("data-status");
+        var status = $(this).attr("data-status");
 
         if( status == "still" ){
             $(this).attr("src", $(this).attr("data-run"));
             $(this).attr("data-status", "run")
-        } else {
+        } else if( status == "run" ) {
             $(this).attr("src", $(this).attr("data-still"));
             $(this).attr("data-status", "still")
         }
@@ -94,10 +95,10 @@ function add(){
     })
 }
 
-$("#play-fav").on("click", function(){
+$("body").on("click", "#play-fav", function(){
     if (fav = []){
         alert("You have nothing on your favorites");
-    } else if (fav !== []) {
+    } else if (fav != []) {
         alert("no");
     }
 })
