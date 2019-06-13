@@ -107,7 +107,7 @@ $("#play-fav").on("click", function(){
         for ( let i = 0; i < fav.length; i++ ){
             var put = fav[i];
             $("#images").append(put);
-            $("#images").append(localStorage.getItem(amount));
+            //$("#images").append(localStorage.getItem(amount));
         }
         changeType();
     }
