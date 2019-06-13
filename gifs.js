@@ -1,12 +1,11 @@
 var list = ["cats", "dog", "fish"];
-var fav = [];
 var count = 0;
 var Storage = [];
 
 if (typeof (Storage) !== "undefined"){
     localStorage.getItem("items");
 } else {
-    alert("no favs");
+    console.log("no favs");
 }
 
 document.onkeyup = function(e){ var choice = e.key; if( choice == "Enter" ){ addbuttons(); }}
@@ -81,7 +80,6 @@ function buttonWork() {
 buttonWork();
 
 //able to switch from gif to pic
-// function changeType() {
     $("body").on("click", ".change", function(){
         var status = $(this).attr("data-status");
 
@@ -93,7 +91,6 @@ buttonWork();
             $(this).attr("data-status", "still")
         }
     })// click function ends
-// }//function ends
 
 function add(){
     $(".add-fav").on("click", function(){
@@ -116,13 +113,7 @@ function add(){
         Storage.push(obj);
         localStorage.setItem("items", JSON.stringify(Storage));
         console.log(firstpart.innerText);
-        // renderGifs(imgrun)
-        // console.log(imgrun);
-        // console.log(imgsrc);
-        // fav.push(imgsrc);
-        //console.log('My fav',fav);
-        // console.log(JSON.stringify(fav));
-        // localStorage.setItem("items", JSON.stringify(fav))
+
     })
 }
 
@@ -137,7 +128,6 @@ function getStorage(){
     } else {
         alert("no gifs");
     }
-    // changeType();
 }
 
 getStorage();
@@ -148,6 +138,5 @@ $("#play-fav").on("click", function(){
     } else {
         $("#images").empty();
         getStorage();
-        // changeType();
     }
 })
