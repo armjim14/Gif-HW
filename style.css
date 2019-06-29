@@ -19,14 +19,14 @@ button:hover {
 
 #images {
     float: left;
-    width: 65%;
+    width: 85%;
 }
 
 #form {
     margin-top: 12px;
     margin-left: 8px;
     float: left;
-    width: 34%;
+    width: 190px;
 }
 
 #para {
@@ -36,6 +36,8 @@ button:hover {
 
 .move {
     float: left;
+    display: inline-grid;
+    margin-right: 10px;
 }
 
 #add-button, .add-fav, #play-fav {
@@ -51,4 +53,8 @@ button:hover {
 #add-button:hover, #add-fav:hover, #play-fav:hover {
     background-color: black;
     color: aquamarine;
+}
+
+.add-fav {
+    display: block;
 }

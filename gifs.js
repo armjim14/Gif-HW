@@ -29,24 +29,45 @@ function addbuttons(){
     buttonWork();
 }
 function renderGifs(gifUrl, picUrl, number, imgname){
-                newdiv = $("<div>");
-                var gif = gifUrl
-                var pic = picUrl;
-                var imgTag = $("<img>").attr("src", pic);
-                var newbutton = $("<button>").text("Fav");
-                newbutton.attr("class", "add-fav");
-                imgTag.attr("data-run", gif);
-                imgTag.attr("data-still", pic);
-                imgTag.attr("data-status", "still");
-                imgTag.attr("data-number", "pic"+ number)
-                imgTag.attr("class", "change");
-                newbutton.attr("data-number", "pic"+number);
-                imgTag.attr("data-name", imgname);
-                var newdiv = $("<div>").attr("class", "move")
-                newdiv.append(newbutton);
-                newdiv.append(imgTag);
-                $("#images").append(newdiv);
+    newdiv = $("<div>");
+    var gif = gifUrl
+    var pic = picUrl;
+    var imgTag = $("<img>").attr("src", pic);
+    var newbutton = $("<button>").text("Fav");
+    newbutton.attr("class", "add-fav");
+    imgTag.attr("data-run", gif);
+    imgTag.attr("data-still", pic);
+    imgTag.attr("data-status", "still");
+    imgTag.attr("data-number", "pic"+ number)
+    imgTag.attr("class", "change");
+    newbutton.attr("data-number", "pic"+number);
+    imgTag.attr("data-name", imgname);
+    var newdiv = $("<div>").attr("class", "move")
+    newdiv.append(imgTag);
+    newdiv.append(newbutton);
+    $("#images").append(newdiv);
 }
+
+function renderGifs2(gifUrl, picUrl, number, imgname){
+    newdiv = $("<div>");
+    var gif = gifUrl
+    var pic = picUrl;
+    var imgTag = $("<img>").attr("src", pic);
+    var newbutton = $("<button>").text("Delete");
+    newbutton.attr("class", "del-fav");
+    imgTag.attr("data-run", gif);
+    imgTag.attr("data-still", pic);
+    imgTag.attr("data-status", "still");
+    imgTag.attr("data-number", "pic"+ number)
+    imgTag.attr("class", "change");
+    newbutton.attr("data-number", number);
+    imgTag.attr("data-name", imgname);
+    var newdiv = $("<div>").attr("class", "move")
+    newdiv.append(imgTag);
+    newdiv.append(newbutton);
+    $("#images").append(newdiv);
+}
+
 //going to display all the images
 function buttonWork() {
     $("button").on("click", function(){
@@ -95,8 +116,8 @@ function add(){
     $(".add-fav").on("click", function(){
 
         var divNumber = $(this).parent();
-        var imginfo = divNumber.children()[1];
-        var firstpart = divNumber.children()[0];
+        var imginfo = divNumber.children()[0];
+        var firstpart = divNumber.children()[1];
         var imgstill = imginfo.getAttribute("data-still");
         var imgrun = imginfo.getAttribute("data-run");
 
@@ -115,8 +136,9 @@ function getStorage(){
     if ((localStorage.getItem("items")) !== null){
         Storage = JSON.parse(localStorage.getItem("items"));
         for (let i = 0; i < Storage.length; i++){
-            renderGifs(Storage[i].imageRun, Storage[i].imageStill, i, Storage[i].imgTitle);
+            renderGifs2(Storage[i].imageRun, Storage[i].imageStill, i, Storage[i].imgTitle);
         }
+        console.log(Storage);
     } else {
         console.log("no gifs")
     }
@@ -124,17 +146,23 @@ function getStorage(){
 
 getStorage();
 
-$("#play-fav").on("click", function(){
+$("body").on("click", "#play-fav", function(){
     if (Storage.length == 0){
         alert("You have nothing on your favorites");
     } else {
-        var temp = document.getElementsByClassName("add-fav");
-        for ( let i = 0; i < temp.length; i++ ){
-            temp[i].style.display = "none";
-        }
         $("#images").empty();
 
         getStorage();
 
     }
+})
+
+$("body").on("click", ".del-fav", function(){
+
+        var numb = $(this).attr("data-number");
+        $("#images").empty();
+        Storage.splice(numb, 1)
+        localStorage.setItem("items", JSON.stringify(Storage));
+        getStorage();
+
 })
