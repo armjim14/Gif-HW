@@ -1,4 +1,4 @@
-var list = ["cats", "dog", "fish"];
+var list = ["cats", "dogs", "fish"];
 var count = 0;
 var Storage = [];
 
