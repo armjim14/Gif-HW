@@ -28,13 +28,11 @@ function addbuttons(){
     dataValue.value= "";
     buttonWork();
 }
-function renderGifs(gifUrl, picUrl, title1, number, imgname){
+function renderGifs(gifUrl, picUrl, number, imgname){
                 newdiv = $("<div>");
                 var gif = gifUrl
                 var pic = picUrl;
-                var title = title1;
                 var imgTag = $("<img>").attr("src", pic);
-                var newp = $("<p>").text(title);
                 var newbutton = $("<button>").text("Fav");
                 newbutton.attr("class", "add-fav");
                 imgTag.attr("data-run", gif);
@@ -44,8 +42,7 @@ function renderGifs(gifUrl, picUrl, title1, number, imgname){
                 imgTag.attr("class", "change");
                 newbutton.attr("data-number", "pic"+number);
                 imgTag.attr("data-name", imgname);
-                var newdiv = $("<div>").attr("data-num", number)
-                newdiv.append(newp);
+                var newdiv = $("<div>").attr("class", "move")
                 newdiv.append(newbutton);
                 newdiv.append(imgTag);
                 $("#images").append(newdiv);
@@ -53,6 +50,10 @@ function renderGifs(gifUrl, picUrl, title1, number, imgname){
 //going to display all the images
 function buttonWork() {
     $("button").on("click", function(){
+        var temp = document.getElementsByClassName("add-fav");
+        for ( let i = 0; i < temp.length; i++ ){
+            temp[i].style.display = "block";
+        }
 
         $("#images").empty();
 
@@ -68,8 +69,7 @@ function buttonWork() {
                 // var newDiv = $("<div>");
                 var gif = response.data[i].images.fixed_width.url;
                 var pic = response.data[i].images.fixed_height_still.url;
-                var title = response.data[i].title;
-                renderGifs(gif, pic, title, i, data);
+                renderGifs(gif, pic, i, data);
             } 
             add();
         }) // once we get request funtion ends
@@ -95,23 +95,18 @@ function add(){
     $(".add-fav").on("click", function(){
 
         var divNumber = $(this).parent();
-        var imginfo = divNumber.children()[2];
+        var imginfo = divNumber.children()[1];
         var firstpart = divNumber.children()[0];
         var imgstill = imginfo.getAttribute("data-still");
         var imgrun = imginfo.getAttribute("data-run");
-        var imgname = imginfo.getAttribute("data-name");
-        var imgtitle = firstpart.innerText;
 
         var obj = {
             imageStill: imgstill,
             imageRun: imgrun,
-            imgName: imgname,
-            imgTitle: imgtitle
         };
 
         Storage.push(obj);
         localStorage.setItem("items", JSON.stringify(Storage));
-        console.log(firstpart.innerText);
 
     })
 }
@@ -119,13 +114,11 @@ function add(){
 function getStorage(){
     if ((localStorage.getItem("items")) !== null){
         Storage = JSON.parse(localStorage.getItem("items"));
-        console.log(JSON.parse(localStorage.getItem("items")));
-        console.log(Storage);
         for (let i = 0; i < Storage.length; i++){
-            renderGifs(Storage[i].imageRun, Storage[i].imageStill, Storage[i].imgName, i, Storage[i].imgTitle);
+            renderGifs(Storage[i].imageRun, Storage[i].imageStill, i, Storage[i].imgTitle);
         }
     } else {
-        alert("no gifs");
+        console.log("no gifs")
     }
 }
 
@@ -135,6 +128,10 @@ $("#play-fav").on("click", function(){
     if (Storage.length == 0){
         alert("You have nothing on your favorites");
     } else {
+        var temp = document.getElementsByClassName("add-fav");
+        for ( let i = 0; i < temp.length; i++ ){
+            temp[i].style.display = "none";
+        }
         $("#images").empty();
 
         getStorage();

@@ -34,7 +34,11 @@ button:hover {
     font-size: 25px;
 }
 
-#add-button, #add-fav, #play-fav {
+.move {
+    float: left;
+}
+
+#add-button, .add-fav, #play-fav {
     font-size: 20px;
     font-weight: bold;
     padding: 8px;
